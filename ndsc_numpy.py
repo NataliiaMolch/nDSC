@@ -22,23 +22,20 @@ def check_inputs(y_pred: np.ndarray, y: np.ndarray) -> None:
                          f"binary mask: {binary_mask}, dimensionality: {dimensionality}.")
 
 
-def ndsc_metric(y_pred: np.ndarray, y: np.ndarray, r: float = 0.001, check: bool = False) -> float:
+def ndsc_metric(y_pred: np.ndarray, y: np.ndarray, effective_load: float = 0.001, check: bool = False) -> float:
     """
     Compute an nDSC for numpy arrays.
     :param y_pred: predicted binary segmentation mask for a single class, no batch or class dimensions.
     :param y: ground truth binary segmentation mask of the same shape as `y_pred`
-    :param r: effective load
+    :param effective_load: effective load
     :param check: if True, `y` and `y_pred` inputs will be checked for type, shape, binarisation.
     :return: nDSC value
     """
     if check:
         check_inputs(y_pred, y)
 
-    y_pred = y_pred.astype('float64')
-    y = y.astype('float64')
-
     if np.sum(y_pred) + np.sum(y) > 0:
-        scaling_factor = 1.0 if np.sum(y) == 0 else (1 - r) * np.sum(y) / (r * (len(y.flatten()) - np.sum(y)))
+        scaling_factor = 1.0 if np.sum(y) == 0 else (1 - effective_load) * np.sum(y) / (effective_load * (len(y.flatten()) - np.sum(y)))
         tp = np.sum(y_pred[y == 1])
         fp = np.sum(y_pred[y == 0])
         fn = np.sum(y[y_pred == 0])

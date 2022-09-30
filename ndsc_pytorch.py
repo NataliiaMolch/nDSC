@@ -126,8 +126,8 @@ def compute_ndice(y_pred: torch.Tensor, y: torch.Tensor, effective_load: Union[t
     if not include_background:
         y_pred, y = ignore_background(y_pred=y_pred, y=y)
 
-    y = y.double()
-    y_pred = y_pred.double()
+    y = y.float()
+    y_pred = y_pred.float()
 
     if y.shape != y_pred.shape:
         raise ValueError(f"y_pred and y should have same shapes, got {y_pred.shape} and {y.shape}.")
