@@ -144,7 +144,7 @@ def compute_ndice(y_pred: torch.Tensor, y: torch.Tensor, effective_load: Union[t
     if isinstance(effective_load, torch.Tensor):
         if y.shape[1] != effective_load.shape[0]:
             raise ValueError(f"expecting effective_loads length to be equal to the number of classes {y.shape[1]}, got {effective_load.shape[0]}.")
-        effective_load_b = torch.stack([effective_load for _ in range(y.shape[0])], dim=0)
+        effective_load_b = torch.stack([effective_load for _ in range(y.shape[0])], dim=0).to(y.device)
         scaling_factor = (1.0 - effective_load_b) * ground_o / (effective_load_b * (n_yelement - ground_o))
     elif isinstance(effective_load, float):
         scaling_factor = (1.0 - effective_load) * ground_o / (effective_load * (n_yelement - ground_o))
