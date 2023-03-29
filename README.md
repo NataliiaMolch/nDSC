@@ -59,4 +59,12 @@ Citation
 Please, use the following citation if using nDSC in your work:
 
 ```text
+@misc{raina2023tackling,
+      title={Tackling Bias in the Dice Similarity Coefficient: Introducing nDSC for White Matter Lesion Segmentation}, 
+      author={Vatsal Raina and Nataliia Molchanova and Mara Graziani and Andrey Malinin and Henning Muller and Meritxell Bach Cuadra and Mark Gales},
+      year={2023},
+      eprint={2302.05432},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
+}
 ```
